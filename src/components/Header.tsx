@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,9 +34,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-2xl font-bold text-primary">
+            <Link to="/" className="text-2xl font-bold text-primary">
               Tricomunica
-            </div>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -64,6 +65,12 @@ const Header = () => {
             >
               Portfólio
             </button>
+            <Link 
+              to="/blog"
+              className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium"
+            >
+              Blog
+            </Link>
             <button 
               onClick={() => scrollToSection('contato')}
               className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium"
@@ -109,6 +116,13 @@ const Header = () => {
               >
                 Portfólio
               </button>
+              <Link 
+                to="/blog"
+                className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
               <button 
                 onClick={() => scrollToSection('contato')}
                 className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
