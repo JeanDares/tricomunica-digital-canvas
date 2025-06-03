@@ -9,6 +9,8 @@ interface BlogCardProps {
   date: string;
   imageUrl: string;
   readTime?: string;
+  content: string;
+  onReadMore: () => void;
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ 
@@ -17,10 +19,15 @@ const BlogCard: React.FC<BlogCardProps> = ({
   author, 
   date, 
   imageUrl, 
-  readTime = "5 min" 
+  readTime = "5 min",
+  content,
+  onReadMore
 }) => {
   return (
-    <article className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100 overflow-hidden cursor-pointer">
+    <article 
+      className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100 overflow-hidden cursor-pointer"
+      onClick={onReadMore}
+    >
       {/* Image */}
       <div className="relative h-48 overflow-hidden">
         <div 

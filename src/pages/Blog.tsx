@@ -1,11 +1,15 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FeaturedArticle from '../components/FeaturedArticle';
 import BlogCard from '../components/BlogCard';
+import ArticleModal from '../components/ArticleModal';
 
 const Blog = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState<any>(null);
+
   // Dados fictícios para demonstração
   const featuredArticle = {
     title: "O Futuro da Comunicação Digital: Estratégias que Conectam",
@@ -36,7 +40,18 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
       author: "Adriano França",
       date: "10 de Janeiro, 2025",
       readTime: "8 min",
-      imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop"
+      imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+      content: `O marketing de conteúdo representa uma revolução na forma como as marcas se comunicam com seus públicos. Diferente da publicidade tradicional, que busca vender diretamente, o marketing de conteúdo constrói relacionamentos através da entrega de valor.
+
+Para criar narrativas que realmente engajam, é essencial conhecer profundamente seu público. Isso vai além de dados demográficos básicos – você precisa entender suas dores, desejos, medos e aspirações. Só assim será possível criar conteúdo que ressoa genuinamente.
+
+A consistência é outro pilar fundamental. Não basta criar um conteúdo excepcional esporadicamente; é necessário manter uma presença constante e previsível. Isso ajuda a construir expectativa e fidelidade na audiência.
+
+O storytelling técnico também é crucial. Cada peça de conteúdo deve ter início, meio e fim bem definidos. Deve haver um conflito ou problema apresentado, uma jornada de descoberta ou solução, e uma resolução satisfatória.
+
+A medição de resultados no marketing de conteúdo vai além de métricas de vaidade. É importante focar em indicadores que realmente importam para o negócio: engajamento qualificado, tempo de permanência, conversões e, principalmente, a construção de autoridade de marca.
+
+Por fim, a adaptação constante é fundamental. O que funciona hoje pode não funcionar amanhã, por isso é essencial manter-se atualizado com as tendências e estar sempre disposto a experimentar novas abordagens.`
     },
     {
       title: "Branding Estratégico: Construindo Marcas Autênticas",
@@ -44,7 +59,18 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
       author: "Adriano França",
       date: "8 de Janeiro, 2025",
       readTime: "6 min",
-      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop"
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+      content: `O branding estratégico é muito mais do que um logotipo bonito ou uma paleta de cores atrativa. É a alma da empresa traduzida em elementos visuais e verbais que criam uma conexão emocional com o público.
+
+Uma marca autêntica nasce de dentro para fora. Ela reflete genuinamente os valores, propósito e personalidade da organização. Quando há alinhamento entre o que a empresa é e o que ela comunica, surge a autenticidade que os consumidores modernos tanto valorizam.
+
+A diferenciação é outro elemento crucial. Em um mercado saturado, não basta ser bom; é preciso ser único. Isso significa encontrar seu posicionamento distintivo e comunicá-lo de forma clara e consistente em todos os pontos de contato.
+
+A consistência visual e verbal cria reconhecimento e confiança. Cada interação que o público tem com sua marca deve reforçar a mesma mensagem e sentimento. Isso inclui desde o tom de voz nas redes sociais até a experiência de atendimento ao cliente.
+
+O branding também deve ser flexível o suficiente para evoluir. Marcas que se mantêm relevantes são aquelas que conseguem adaptar-se às mudanças do mercado sem perder sua essência.
+
+Finalmente, uma marca forte é construída através de experiências consistentemente positivas. Cada promessa feita pela marca deve ser cumprida na prática, criando uma reputação sólida e confiável.`
     },
     {
       title: "Redes Sociais: Estratégias para Maximizar o Alcance",
@@ -52,7 +78,20 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
       author: "Adriano França",
       date: "5 de Janeiro, 2025",
       readTime: "10 min",
-      imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop"
+      imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop",
+      content: `As redes sociais se tornaram o epicentro da comunicação digital moderna. Para maximizar o alcance orgânico, é essencial entender os algoritmos e criar conteúdo que gere engajamento genuíno.
+
+A primeira regra é conhecer cada plataforma profundamente. O que funciona no Instagram pode não funcionar no LinkedIn. Cada rede tem sua própria linguagem, formato preferido e comportamento de usuário característico.
+
+O timing é crucial. Publicar no momento certo pode significar a diferença entre alcançar centenas ou milhares de pessoas. Isso requer análise de dados constante e ajustes baseados no comportamento específico da sua audiência.
+
+A criação de comunidade é mais valiosa que o número de seguidores. Mil seguidores engajados valem mais que dez mil passivos. Foque em criar conversas significativas e responder genuinamente aos comentários.
+
+O conteúdo visual continua dominando. Vídeos, especialmente, têm performance superior na maioria das plataformas. Mas não se trata apenas de qualidade técnica – o conteúdo precisa ser emocionalmente envolvente.
+
+A colaboração com influenciadores e outros criadores pode exponencialmente aumentar seu alcance. Mas é importante escolher parceiros que tenham alinhamento genuíno com sua marca e valores.
+
+Por fim, a análise de métricas deve guiar suas decisões. Não se baseie apenas em impressões – analise engajamento, salvamentos, compartilhamentos e, principalmente, ações que levam a conversões reais.`
     },
     {
       title: "SEO e Content Marketing: A Combinação Perfeita",
@@ -60,7 +99,20 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
       author: "Adriano França",
       date: "2 de Janeiro, 2025",
       readTime: "7 min",
-      imageUrl: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=300&fit=crop"
+      imageUrl: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=300&fit=crop",
+      content: `A união entre SEO e marketing de conteúdo representa uma das estratégias mais poderosas do marketing digital atual. Quando bem executada, essa combinação gera tráfego qualificado e autoridade de marca simultaneamente.
+
+O SEO moderno prioriza a intenção de busca do usuário. Isso significa que criar conteúdo apenas para ranquear palavras-chave específicas não é mais suficiente. É preciso entender o que o usuário realmente está procurando e entregar valor genuíno.
+
+A pesquisa de palavras-chave deve ser o ponto de partida, mas não o destino final. Use-a para entender as dúvidas e necessidades do seu público, depois crie conteúdo abrangente que responda completamente a essas questões.
+
+A estrutura do conteúdo é fundamental para o SEO. Use headers hierárquicos (H1, H2, H3) de forma lógica, crie parágrafos digestíveis e inclua elementos visuais que quebrem o texto e melhorem a experiência do usuário.
+
+A velocidade de carregamento e a experiência mobile são fatores de ranqueamento cruciais. Não adianta ter o melhor conteúdo do mundo se o site é lento ou não funciona bem em dispositivos móveis.
+
+O link building orgânico acontece naturalmente quando você cria conteúdo verdadeiramente valioso. Foque em ser uma fonte confiável de informação em sua área de expertise.
+
+Finalmente, a consistência é chave. O SEO é uma estratégia de longo prazo que requer paciência e persistência. Os resultados podem demorar para aparecer, mas quando chegam, tendem a ser duradouros e escaláveis.`
     },
     {
       title: "Análise de Dados: Medindo o Sucesso da sua Comunicação",
@@ -68,7 +120,20 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
       author: "Adriano França",
       date: "28 de Dezembro, 2024",
       readTime: "9 min",
-      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop"
+      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      content: `A análise de dados transformou a comunicação de uma arte subjetiva em uma ciência mensurável. Hoje, é possível rastrear cada interação e entender precisamente o que funciona e o que precisa ser ajustado.
+
+O primeiro passo é definir KPIs (Key Performance Indicators) alinhados com os objetivos de negócio. Não se perca em métricas de vaidade – foque em indicadores que realmente importam para o crescimento da empresa.
+
+A implementação de ferramentas de analytics deve ser feita de forma estratégica. Google Analytics, Facebook Insights, LinkedIn Analytics – cada plataforma oferece dados únicos que, quando combinados, criam um panorama completo da performance.
+
+A segmentação de audiência nos dados revela insights valiosos. Diferentes grupos podem responder de forma completamente distinta às mesmas campanhas. Entender essas nuances permite otimizações mais precisas.
+
+O funil de conversão deve ser mapeado e monitorado constantemente. Identifique onde os usuários estão saindo e por quê. Cada ponto de atrito identificado é uma oportunidade de melhoria.
+
+A análise competitiva também é fundamental. Ferramentas como SEMrush e Ahrefs permitem entender o que a concorrência está fazendo e identificar lacunas que podem ser exploradas.
+
+Por fim, transformar dados em insights acionáveis é uma habilidade que deve ser desenvolvida. Não basta coletar informações – é preciso interpretá-las corretamente e implementar mudanças baseadas nessas descobertas.`
     },
     {
       title: "Comunicação Corporativa: Construindo Relacionamentos Duradouros",
@@ -76,9 +141,27 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
       author: "Adriano França",
       date: "25 de Dezembro, 2024",
       readTime: "11 min",
-      imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop"
+      imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+      content: `A comunicação corporativa eficaz é a base para relacionamentos duradouros com todos os stakeholders da empresa. Ela vai muito além do marketing tradicional, abrangendo relações com investidores, funcionários, mídia e comunidade.
+
+A transparência se tornou um valor não negociável na comunicação corporativa moderna. As empresas que se comunicam de forma aberta e honesta, especialmente durante crises, constroem maior confiança e resiliência de marca.
+
+A comunicação interna é tão importante quanto a externa. Funcionários engajados e bem informados são os melhores embaixadores da marca. Investir em canais de comunicação interna eficazes gera resultados que se refletem externamente.
+
+O gerenciamento de crise deve ser proativo, não reativo. Ter protocolos claros de comunicação para diferentes cenários pode significar a diferença entre superar uma crise fortalecido ou sofrer danos duradouros à reputação.
+
+A personalização também chegou à comunicação corporativa. Diferentes stakeholders têm diferentes necessidades de informação. A mensagem principal pode ser a mesma, mas a forma de comunicá-la deve ser adaptada para cada audiência.
+
+O storytelling corporativo humaniza a marca. Contar a história da empresa, seus valores e propósito de forma envolvente cria conexões emocionais que vão além de transações comerciais.
+
+Finalmente, a medição da reputação corporativa deve ser constante. Ferramentas de monitoramento de mídia e pesquisas de percepção ajudam a entender como a empresa é vista e identificar oportunidades de melhoria na comunicação.`
     }
   ];
+
+  const handleReadMore = (article: any) => {
+    setSelectedArticle(article);
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -107,7 +190,13 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
                   className="animate-fade-in"
                   style={{ animationDelay: `${0.1 * index}s` }}
                 >
-                  <BlogCard {...post} />
+                  <BlogCard 
+                    {...post} 
+                    onReadMore={() => handleReadMore({
+                      ...post,
+                      backgroundImage: post.imageUrl
+                    })}
+                  />
                 </div>
               ))}
             </div>
@@ -123,6 +212,15 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
       </main>
 
       <Footer />
+
+      {/* Article Modal */}
+      {selectedArticle && (
+        <ArticleModal 
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          article={selectedArticle}
+        />
+      )}
     </div>
   );
 };
