@@ -1,17 +1,27 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FeaturedArticle from '../components/FeaturedArticle';
 import BlogCard from '../components/BlogCard';
 import ArticleModal from '../components/ArticleModal';
+import { useAdmin } from '../contexts/AdminContext';
+import { Button } from '@/components/ui/button';
+import { 
+  FileText, 
+  Newspaper, 
+  BookOpen, 
+  Briefcase,
+  Filter 
+} from 'lucide-react';
 
 const Blog = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const { posts } = useAdmin();
 
-  // Dados fictícios para demonstração
-  const featuredArticle = {
+  // Dados fictícios para demonstração (mantendo para quando não há posts criados)
+  const defaultFeaturedArticle = {
     title: "O Futuro da Comunicação Digital: Estratégias que Conectam",
     description: "Explore as tendências emergentes em comunicação digital e como elas estão redefinindo a forma como as marcas se conectam com seus públicos.",
     author: "Adriano França",
@@ -33,7 +43,7 @@ Por fim, a medição e análise de resultados se tornaram mais sofisticadas. Nã
 O futuro da comunicação digital está nas mãos daqueles que conseguem equilibrar tecnologia com humanização, dados com criatividade, e estratégia com autenticidade.`
   };
 
-  const blogPosts = [
+  const defaultBlogPosts = [
     {
       title: "Marketing de Conteúdo: Como Criar Narrativas que Engajam",
       description: "Descubra as técnicas mais eficazes para criar conteúdo que realmente conecta com sua audiência e gera resultados mensuráveis.",
@@ -158,9 +168,31 @@ Finalmente, a medição da reputação corporativa deve ser constante. Ferrament
     }
   ];
 
+  // Usar posts criados se existirem, senão usar os padrão
+  const featuredPost = posts.find(post => post.featured) || defaultFeaturedArticle;
+  const allPosts = posts.length > 0 ? posts.filter(post => !post.featured) : defaultBlogPosts;
+
+  // Filtrar posts por categoria
+  const filteredPosts = selectedCategory === 'all' 
+    ? allPosts 
+    : allPosts.filter(post => post.category === selectedCategory);
+
   const handleReadMore = (article: any) => {
     setSelectedArticle(article);
     setIsModalOpen(true);
+  };
+
+  const categories = [
+    { id: 'all', name: 'Todos', icon: Filter },
+    { id: 'blog', name: 'Blog', icon: FileText },
+    { id: 'noticia', name: 'Notícias', icon: Newspaper },
+    { id: 'tutorial', name: 'Tutoriais', icon: BookOpen },
+    { id: 'case-study', name: 'Case Studies', icon: Briefcase }
+  ];
+
+  const getCategoryCount = (categoryId: string) => {
+    if (categoryId === 'all') return allPosts.length;
+    return allPosts.filter(post => post.category === categoryId).length;
   };
 
   return (
@@ -169,7 +201,7 @@ Finalmente, a medição da reputação corporativa deve ser constante. Ferrament
       
       <main className="pt-20">
         {/* Featured Article */}
-        <FeaturedArticle {...featuredArticle} />
+        <FeaturedArticle {...featuredPost} />
         
         {/* Blog Posts Grid */}
         <section className="py-20 bg-muted/30">
@@ -183,10 +215,36 @@ Finalmente, a medição da reputação corporativa deve ser constante. Ferrament
               </p>
             </div>
 
+            {/* Category Filters */}
+            <div className="flex flex-wrap justify-center gap-3 mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              {categories.map((category) => {
+                const CategoryIcon = category.icon;
+                const count = getCategoryCount(category.id);
+                
+                return (
+                  <Button
+                    key={category.id}
+                    onClick={() => setSelectedCategory(category.id)}
+                    variant={selectedCategory === category.id ? "default" : "outline"}
+                    className="flex items-center space-x-2"
+                  >
+                    <CategoryIcon size={16} />
+                    <span>{category.name}</span>
+                    {count > 0 && (
+                      <span className="bg-white/20 text-xs px-2 py-0.5 rounded-full">
+                        {count}
+                      </span>
+                    )}
+                  </Button>
+                );
+              })}
+            </div>
+
+            {/* Posts Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post, index) => (
+              {filteredPosts.map((post, index) => (
                 <div 
-                  key={index}
+                  key={post.id || index}
                   className="animate-fade-in"
                   style={{ animationDelay: `${0.1 * index}s` }}
                 >
@@ -201,12 +259,22 @@ Finalmente, a medição da reputação corporativa deve ser constante. Ferrament
               ))}
             </div>
 
-            {/* Load More Button */}
-            <div className="text-center mt-16 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-              <button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
-                Carregar Mais Artigos
-              </button>
-            </div>
+            {filteredPosts.length === 0 && (
+              <div className="text-center py-16">
+                <p className="text-secondary-foreground/60 text-lg">
+                  Nenhum post encontrado nesta categoria.
+                </p>
+              </div>
+            )}
+
+            {/* Load More Button - só mostrar se há posts padrão */}
+            {posts.length === 0 && (
+              <div className="text-center mt-16 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+                <button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                  Carregar Mais Artigos
+                </button>
+              </div>
+            )}
           </div>
         </section>
       </main>
