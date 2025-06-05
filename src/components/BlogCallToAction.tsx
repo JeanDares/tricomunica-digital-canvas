@@ -17,11 +17,11 @@ const BlogCallToAction = () => {
 
           {/* Content */}
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Explore meu Blog
+            Explore o Blog
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
             Descubra artigos sobre desenvolvimento web, tecnologia, tutoriais práticos e insights do mundo tech. 
-            Compartilho conhecimento e experiências para ajudar outros desenvolvedores.
+            A empresa compartilha conhecimento e experiências para ajudar outros desenvolvedores e empresas.
           </p>
 
           {/* Features */}

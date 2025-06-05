@@ -20,6 +20,15 @@ const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const { posts } = useAdmin();
 
+  // Imagens padrão para quando não há imagem definida
+  const defaultImages = [
+    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=1920&h=1080&fit=crop",
+    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1920&h=1080&fit=crop",
+    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&h=1080&fit=crop",
+    "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1920&h=1080&fit=crop",
+    "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=1920&h=1080&fit=crop"
+  ];
+
   // Dados fictícios para demonstração (mantendo para quando não há posts criados)
   const defaultFeaturedArticle = {
     title: "O Futuro da Comunicação Digital: Estratégias que Conectam",
@@ -51,6 +60,7 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
       date: "10 de Janeiro, 2025",
       readTime: "8 min",
       imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+      category: "blog",
       content: `O marketing de conteúdo representa uma revolução na forma como as marcas se comunicam com seus públicos. Diferente da publicidade tradicional, que busca vender diretamente, o marketing de conteúdo constrói relacionamentos através da entrega de valor.
 
 Para criar narrativas que realmente engajam, é essencial conhecer profundamente seu público. Isso vai além de dados demográficos básicos – você precisa entender suas dores, desejos, medos e aspirações. Só assim será possível criar conteúdo que ressoa genuinamente.
@@ -70,6 +80,7 @@ Por fim, a adaptação constante é fundamental. O que funciona hoje pode não f
       date: "8 de Janeiro, 2025",
       readTime: "6 min",
       imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+      category: "blog",
       content: `O branding estratégico é muito mais do que um logotipo bonito ou uma paleta de cores atrativa. É a alma da empresa traduzida em elementos visuais e verbais que criam uma conexão emocional com o público.
 
 Uma marca autêntica nasce de dentro para fora. Ela reflete genuinamente os valores, propósito e personalidade da organização. Quando há alinhamento entre o que a empresa é e o que ela comunica, surge a autenticidade que os consumidores modernos tanto valorizam.
@@ -89,6 +100,7 @@ Finalmente, uma marca forte é construída através de experiências consistente
       date: "5 de Janeiro, 2025",
       readTime: "10 min",
       imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop",
+      category: "tutorial",
       content: `As redes sociais se tornaram o epicentro da comunicação digital moderna. Para maximizar o alcance orgânico, é essencial entender os algoritmos e criar conteúdo que gere engajamento genuíno.
 
 A primeira regra é conhecer cada plataforma profundamente. O que funciona no Instagram pode não funcionar no LinkedIn. Cada rede tem sua própria linguagem, formato preferido e comportamento de usuário característico.
@@ -110,6 +122,7 @@ Por fim, a análise de métricas deve guiar suas decisões. Não se baseie apena
       date: "2 de Janeiro, 2025",
       readTime: "7 min",
       imageUrl: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=300&fit=crop",
+      category: "tutorial",
       content: `A união entre SEO e marketing de conteúdo representa uma das estratégias mais poderosas do marketing digital atual. Quando bem executada, essa combinação gera tráfego qualificado e autoridade de marca simultaneamente.
 
 O SEO moderno prioriza a intenção de busca do usuário. Isso significa que criar conteúdo apenas para ranquear palavras-chave específicas não é mais suficiente. É preciso entender o que o usuário realmente está procurando e entregar valor genuíno.
@@ -131,6 +144,7 @@ Finalmente, a consistência é chave. O SEO é uma estratégia de longo prazo qu
       date: "28 de Dezembro, 2024",
       readTime: "9 min",
       imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      category: "case-study",
       content: `A análise de dados transformou a comunicação de uma arte subjetiva em uma ciência mensurável. Hoje, é possível rastrear cada interação e entender precisamente o que funciona e o que precisa ser ajustado.
 
 O primeiro passo é definir KPIs (Key Performance Indicators) alinhados com os objetivos de negócio. Não se perca em métricas de vaidade – foque em indicadores que realmente importam para o crescimento da empresa.
@@ -152,6 +166,7 @@ Por fim, transformar dados em insights acionáveis é uma habilidade que deve se
       date: "25 de Dezembro, 2024",
       readTime: "11 min",
       imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+      category: "case-study",
       content: `A comunicação corporativa eficaz é a base para relacionamentos duradouros com todos os stakeholders da empresa. Ela vai muito além do marketing tradicional, abrangendo relações com investidores, funcionários, mídia e comunidade.
 
 A transparência se tornou um valor não negociável na comunicação corporativa moderna. As empresas que se comunicam de forma aberta e honesta, especialmente durante crises, constroem maior confiança e resiliência de marca.
@@ -168,8 +183,18 @@ Finalmente, a medição da reputação corporativa deve ser constante. Ferrament
     }
   ];
 
+  // Função para obter imagem padrão quando não há imageUrl
+  const getPostImage = (post: any, index: number) => {
+    if (post.imageUrl) return post.imageUrl;
+    return defaultImages[index % defaultImages.length];
+  };
+
   // Usar posts criados se existirem, senão usar os padrão
-  const featuredPost = posts.find(post => post.featured) || defaultFeaturedArticle;
+  const featuredPost = posts.find(post => post.featured) || {
+    ...defaultFeaturedArticle,
+    backgroundImage: defaultFeaturedArticle.backgroundImage
+  };
+
   const allPosts = posts.length > 0 ? posts.filter(post => !post.featured) : defaultBlogPosts;
 
   // Filtrar posts por categoria
@@ -201,7 +226,10 @@ Finalmente, a medição da reputação corporativa deve ser constante. Ferrament
       
       <main className="pt-20">
         {/* Featured Article */}
-        <FeaturedArticle {...featuredPost} />
+        <FeaturedArticle 
+          {...featuredPost} 
+          backgroundImage={featuredPost.backgroundImage || featuredPost.imageUrl || defaultImages[0]}
+        />
         
         {/* Blog Posts Grid */}
         <section className="py-20 bg-muted/30">
@@ -250,9 +278,10 @@ Finalmente, a medição da reputação corporativa deve ser constante. Ferrament
                 >
                   <BlogCard 
                     {...post} 
+                    imageUrl={getPostImage(post, index)}
                     onReadMore={() => handleReadMore({
                       ...post,
-                      backgroundImage: post.imageUrl
+                      backgroundImage: getPostImage(post, index)
                     })}
                   />
                 </div>
