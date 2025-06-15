@@ -9,7 +9,8 @@ interface Post {
   author: string;
   date: string;
   readTime: string;
-  imageUrl: string;
+  imageUrl?: string; // tornado opcional
+  backgroundImage?: string; // novo campo opcional
   category: 'blog' | 'noticia' | 'tutorial' | 'case-study';
   featured?: boolean;
 }

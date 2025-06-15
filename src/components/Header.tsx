@@ -1,11 +1,24 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+const LOGO_URL = "/lovable-uploads/b2444c6c-eddc-48b2-95a0-bf09a405fa0a.png";
+
+const NAV_LINKS = [
+  { label: 'Home', section: 'home', show: true },
+  { label: 'Sobre', section: 'sobre', show: true },
+  { label: 'Serviços', section: 'servicos', show: true },
+  { label: 'Portfólio', section: 'portfolio', show: true },
+  { label: 'Blog', href: '/blog', show: true },
+  { label: 'Contato', section: 'contato', show: true },
+];
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,12 +29,21 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+  // Função para rolar até uma seção da página inicial, mesmo se estiver em outra página
+  const scrollToSectionHybrid = (sectionId: string) => {
+    if (location.pathname !== "/") {
+      // Se não está na home, navega para home e depois faz scroll
+      navigate("/");
+      // Espera a navegação acontecer antes de rolar (pequeno delay)
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 400);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -34,49 +56,38 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-primary">
-              Tricomunica
+            <Link to="/" className="flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
+              <img
+                src={LOGO_URL}
+                alt="Tricomunica Logo"
+                className="h-10 sm:h-12 w-auto object-contain mr-2"
+                style={{ maxWidth: "180px" }}
+              />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => scrollToSection('home')}
-              className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('sobre')}
-              className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium"
-            >
-              Sobre
-            </button>
-            <button 
-              onClick={() => scrollToSection('servicos')}
-              className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium"
-            >
-              Serviços
-            </button>
-            <button 
-              onClick={() => scrollToSection('portfolio')}
-              className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium"
-            >
-              Portfólio
-            </button>
-            <Link 
-              to="/blog"
-              className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium"
-            >
-              Blog
-            </Link>
-            <button 
-              onClick={() => scrollToSection('contato')}
-              className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium"
-            >
-              Contato
-            </button>
+            {NAV_LINKS.map(link =>
+              link.show && (link.href ? (
+                <Link 
+                  key={link.label}
+                  to={link.href}
+                  className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  key={link.label}
+                  onClick={() => scrollToSectionHybrid(link.section!)}
+                  className="text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium bg-transparent border-none outline-none"
+                >
+                  {link.label}
+                </button>
+              ))
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -92,43 +103,26 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 animate-slide-down">
             <div className="flex flex-col space-y-4">
-              <button 
-                onClick={() => scrollToSection('home')}
-                className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
-              >
-                Home
-              </button>
-              <button 
-                onClick={() => scrollToSection('sobre')}
-                className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
-              >
-                Sobre
-              </button>
-              <button 
-                onClick={() => scrollToSection('servicos')}
-                className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
-              >
-                Serviços
-              </button>
-              <button 
-                onClick={() => scrollToSection('portfolio')}
-                className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
-              >
-                Portfólio
-              </button>
-              <Link 
-                to="/blog"
-                className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Blog
-              </Link>
-              <button 
-                onClick={() => scrollToSection('contato')}
-                className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
-              >
-                Contato
-              </button>
+              {NAV_LINKS.map(link =>
+                link.show && (link.href ? (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollToSectionHybrid(link.section!)}
+                    className="text-left text-secondary-foreground hover:text-primary transition-colors duration-300 font-medium py-2 bg-transparent border-none outline-none"
+                  >
+                    {link.label}
+                  </button>
+                ))
+              )}
             </div>
           </div>
         )}
