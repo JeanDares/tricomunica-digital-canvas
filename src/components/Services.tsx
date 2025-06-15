@@ -22,8 +22,8 @@ const Services = () => {
     },
     {
       icon: Palette,
-      title: "Branding e Identidade Visual",
-      description: "Desenvolvimento de identidade visual consistente que reflete os valores e a personalidade única da sua marca."
+      title: "Branding",
+      description: "Desenvolvimento de identidade de marca consistente que reflete os valores e a personalidade única da sua empresa."
     }
   ];
 

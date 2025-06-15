@@ -9,12 +9,24 @@ const Portfolio = () => {
       description: "Estratégia de comunicação digital e produção de conteúdo para fortalecimento da marca no mercado corporativo."
     },
     {
-      name: "IPJI",
-      description: "Desenvolvimento de identidade visual e campanhas de marketing digital para engajamento da comunidade."
+      name: "EDER LUIZ",
+      description: "Consultoria em comunicação jornalística e estratégia de conteúdo para plataformas digitais."
     },
     {
-      name: "Eder Luiz Notícias",
-      description: "Consultoria em comunicação jornalística e estratégia de conteúdo para plataformas digitais."
+      name: "MAIS ÓCULOS",
+      description: "Gestão de redes sociais e produção de conteúdo para engajamento e crescimento da marca."
+    },
+    {
+      name: "RENNA COMPONENTES",
+      description: "Gestão de redes sociais, produção de conteúdo e marketing digital para o setor automotivo."
+    },
+    {
+      name: "PIX ILUMINAÇÃO",
+      description: "Gestão de redes sociais, produção de conteúdo e marketing digital para soluções em iluminação."
+    },
+    {
+      name: "IPJI",
+      description: "Desenvolvimento de identidade visual e campanhas de marketing digital para engajamento da comunidade."
     }
   ];
 
@@ -41,7 +53,7 @@ const Portfolio = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {clients.map((client, index) => (
             <div key={index} className="animate-fade-in hover:animate-pulse" style={{ animationDelay: `${index * 0.2}s` }}>
               <ClientCard {...client} />

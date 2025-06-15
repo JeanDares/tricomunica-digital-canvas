@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -54,6 +55,7 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
 
   const defaultBlogPosts = [
     {
+      id: "1",
       title: "Marketing de Conteúdo: Como Criar Narrativas que Engajam",
       description: "Descubra as técnicas mais eficazes para criar conteúdo que realmente conecta com sua audiência e gera resultados mensuráveis.",
       author: "Adriano França",
@@ -191,8 +193,7 @@ Finalmente, a medição da reputação corporativa deve ser constante. Ferrament
 
   // Usar posts criados se existirem, senão usar os padrão
   const featuredPost = posts.find(post => post.featured) || {
-    ...defaultFeaturedArticle,
-    backgroundImage: defaultFeaturedArticle.backgroundImage
+    ...defaultFeaturedArticle
   };
 
   const allPosts = posts.length > 0 ? posts.filter(post => !post.featured) : defaultBlogPosts;
