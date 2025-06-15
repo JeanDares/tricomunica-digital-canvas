@@ -29,6 +29,49 @@ const Blog = () => {
     "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=1920&h=1080&fit=crop"
   ];
 
+  // Dados fictícios para demonstração de posts comuns (definindo defaultBlogPosts para evitar erro TS2304)
+  const defaultBlogPosts = [
+    {
+      id: '1',
+      title: "Como Construir Autoridade no Instagram em 2025",
+      description: "Descubra estratégias modernas para fortalecer sua marca pessoal ou empresarial no Instagram neste ano de novas tendências e algoritmos.",
+      author: "Gabriela Terra",
+      date: "2 de Janeiro, 2025",
+      readTime: "7 min",
+      imageUrl: defaultImages[0],
+      backgroundImage: defaultImages[0],
+      content: `O Instagram se reinventa a cada ano (...)\n\nAcompanhe as novidades mais importantes e como usá-las.`,
+      category: 'blog',
+      featured: false
+    },
+    {
+      id: '2',
+      title: "Novas Algoritmos das Redes Sociais: O que Mudou?",
+      description: "Analisamos o impacto das recentes mudanças nos algoritmos das principais redes sociais e como isso afeta o alcance orgânico.",
+      author: "Adriano França",
+      date: "10 de Janeiro, 2025",
+      readTime: "6 min",
+      imageUrl: defaultImages[1],
+      backgroundImage: defaultImages[1],
+      content: `Os algoritmos das redes sociais passaram (...)\n\nDescubra táticas para manter o engajamento alto.`,
+      category: 'noticia',
+      featured: false
+    },
+    {
+      id: '3',
+      title: "Tutorial: Como Criar uma Campanha Digital do Zero",
+      description: "Um passo a passo simples para criar campanhas digitais bem-sucedidas para pequenas e médias empresas.",
+      author: "Equipe Tricomunica",
+      date: "15 de Janeiro, 2025",
+      readTime: "9 min",
+      imageUrl: defaultImages[2],
+      backgroundImage: defaultImages[2],
+      content: `Criar uma campanha digital eficiente (...)\n\nSiga este guia prático!`,
+      category: 'tutorial',
+      featured: false
+    }
+  ];
+
   // Dados fictícios para demonstração (mantendo para quando não há posts criados)
   const defaultFeaturedArticle = {
     title: "O Futuro da Comunicação Digital: Estratégias que Conectam",
@@ -60,18 +103,16 @@ O futuro da comunicação digital está nas mãos daqueles que conseguem equilib
 
   // Usar posts criados se existirem, senão usar os padrão
   const featuredPost = posts.find(post => post.featured) || {
-    ...defaultFeaturedArticle
+    ...defaultFeaturedArticle,
+    // Garante que imageUrl e backgroundImage existem para fallback também:
+    imageUrl: defaultFeaturedArticle.backgroundImage,
+    backgroundImage: defaultFeaturedArticle.backgroundImage
   };
 
   // allPosts tipado como Post[], mas os defaultBlogPosts não têm id, imageUrl e backgroundImage
   const allPosts = posts.length > 0
     ? posts.filter(post => !post.featured)
-    : defaultBlogPosts.map((post, i) => ({
-        ...post,
-        id: post.id ?? String(i + 1),
-        imageUrl: post.imageUrl ?? defaultImages[i % defaultImages.length],
-        backgroundImage: post.backgroundImage ?? post.imageUrl ?? defaultImages[i % defaultImages.length],
-      }));
+    : defaultBlogPosts;
 
   // Filtrar posts por categoria
   const filteredPosts = selectedCategory === 'all'
