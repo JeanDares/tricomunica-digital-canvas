@@ -2,7 +2,9 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const LOGO_URL = "../../public/Logo Oficial laranja.png";
+// ... existing code ...
+const LOGO_URL = "/Logo Oficial laranja.png";
+// ... existing code ...
 
 const NAV_LINKS = [
   { label: "Home", section: "home", show: true },
