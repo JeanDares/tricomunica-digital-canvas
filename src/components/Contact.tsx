@@ -41,7 +41,7 @@ const Contact = () => {
             {/* WhatsApp */}
             <div className="animate-fade-in" style={{ animationDelay: "0.4s" }}>
               <a
-                href="https://wa.me/554981188791"
+                href="https://wa.me/5554981188791"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 group relative overflow-hidden"
