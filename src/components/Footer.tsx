@@ -23,7 +23,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://instagram.com/tricomunica"
+                href="https://instagram.com/tri.comunica"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white/10 p-3 rounded-xl hover:bg-primary hover:scale-110 transition-all duration-300"

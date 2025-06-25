@@ -4,17 +4,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Calendar,
-  Check,
-  Copy,
-  Facebook,
-  Linkedin,
-  Share2,
-  Twitter,
-  User,
-  X,
-} from "lucide-react";
+import { Calendar, Check, Copy, Facebook, Share2, User, X } from "lucide-react";
 import React, { useState } from "react";
 
 interface ArticleModalProps {
@@ -53,21 +43,21 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
   };
 
   // Função para compartilhar no Twitter/X
-  const shareOnTwitter = () => {
-    const twitterText = `${article.title} - ${article.description}`;
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-      twitterText
-    )}&url=${encodeURIComponent(articleUrl)}&via=tricomunica`;
-    window.open(twitterUrl, "_blank", "width=600,height=400");
-  };
+  // const shareOnTwitter = () => {
+  //   const twitterText = `${article.title} - ${article.description}`;
+  //   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+  //     twitterText
+  //   )}&url=${encodeURIComponent(articleUrl)}&via=tricomunica`;
+  //   window.open(twitterUrl, "_blank", "width=600,height=400");
+  // };
 
-  // Função para compartilhar no LinkedIn
-  const shareOnLinkedIn = () => {
-    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-      articleUrl
-    )}`;
-    window.open(linkedinUrl, "_blank", "width=600,height=400");
-  };
+  // // Função para compartilhar no LinkedIn
+  // const shareOnLinkedIn = () => {
+  //   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+  //     articleUrl
+  //   )}`;
+  //   window.open(linkedinUrl, "_blank", "width=600,height=400");
+  // };
 
   // Função para copiar link
   const copyToClipboard = async () => {
@@ -178,7 +168,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
                 <Facebook size={16} />
               </button>
 
-              <button
+              {/* <button
                 onClick={shareOnTwitter}
                 className="p-2 bg-gray-900 hover:bg-black text-white rounded-full transition-all duration-300 hover:scale-110"
                 title="Compartilhar no Twitter/X"
@@ -192,7 +182,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
                 title="Compartilhar no LinkedIn"
               >
                 <Linkedin size={16} />
-              </button>
+              </button> */}
 
               <button
                 onClick={copyToClipboard}
@@ -239,7 +229,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
               </p>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="https://instagram.com/tricomunica"
+                  href="https://instagram.com/tri.comunica"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 bg-primary text-white rounded-full text-sm font-medium hover:bg-primary/90 transition-colors"
