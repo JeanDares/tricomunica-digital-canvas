@@ -31,7 +31,7 @@ const Footer = () => {
                 <Instagram size={20} />
               </a>
               <a
-                href="https://linkedin.com/company/tricomunica"
+                href="https://www.linkedin.com/company/tricomunica-assessoria-marketing/about/?viewAsMember=true"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white/10 p-3 rounded-xl hover:bg-primary hover:scale-110 transition-all duration-300"
