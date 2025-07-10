@@ -10,6 +10,8 @@ interface Testimonial {
   avatar: string;
 }
 
+const AVATAR_URL = "/cliente01.jpeg";
+
 const testimonials: Testimonial[] = [
   {
     id: 1,
@@ -19,7 +21,7 @@ const testimonials: Testimonial[] = [
     content:
       "A Tricomunica tem sido uma grande parceira da AMECS. É um trabalho intenso e comprometido, que faz diferença no nosso dia a dia. Eles cuidam das campanhas do Instagram, do site, das notícias e dos artigos para o blog, além de todo o planejamento, sempre de forma orgânica e respeitando a identidade da associação. Hoje, a comunicação da AMECS está muito mais estruturada e alinhada, e isso fortalece o nosso trabalho e aproxima ainda mais a comunidade.",
     rating: 5,
-    avatar: "../../public/cliente01.jpeg",
+    avatar: AVATAR_URL,
   },
 ];
 
