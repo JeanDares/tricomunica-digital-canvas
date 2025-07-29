@@ -12,7 +12,7 @@ interface Testimonial {
 }
 
 const AVATAR_URL = "/cliente01.jpeg";
-const AVATAR_URL_2 = "/public/MaisProfile.jpeg";
+const AVATAR_URL_2 = "/cliente02.jpeg";
 
 // Adicione mais depoimentos se desejar
 const testimonials: Testimonial[] = [
